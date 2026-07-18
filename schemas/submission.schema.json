@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sidekick.example/schemas/submission.schema.json",
+  "title": "Sidekick Submission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "organizationId",
+    "createdByUserId",
+    "status",
+    "version",
+    "title",
+    "identityStatus",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "organizationId": {
+      "type": "string"
+    },
+    "patientId": {
+      "type": "string"
+    },
+    "createdByUserId": {
+      "type": "string"
+    },
+    "templateKey": {
+      "type": "string"
+    },
+    "templateVersion": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "identifying_form",
+        "unsupported_form",
+        "interview_in_progress",
+        "patient_review",
+        "patient_signed",
+        "staff_review_pending",
+        "staff_review_in_progress",
+        "patient_action_required",
+        "appointment_required",
+        "clinician_review_pending",
+        "clinician_review_in_progress",
+        "clinician_signed",
+        "export_pending",
+        "completed",
+        "cancelled"
+      ]
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "title": {
+      "type": "string"
+    },
+    "identityStatus": {
+      "enum": [
+        "matched",
+        "review",
+        "unlinked"
+      ]
+    },
+    "patientSignatureId": {
+      "type": "string"
+    },
+    "clinicianSignatureId": {
+      "type": "string"
+    },
+    "disposition": {
+      "enum": [
+        "review_only",
+        "appointment_required",
+        "return_to_patient",
+        "manual_process"
+      ]
+    },
+    "appointmentAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "availableAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "assignedClinicianId": {
+      "type": "string"
+    },
+    "criticalIssueCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "warningCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

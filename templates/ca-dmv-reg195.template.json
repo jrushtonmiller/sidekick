@@ -1,0 +1,1058 @@
+{
+  "schemaVersion": "1.0",
+  "key": "ca_dmv_reg195",
+  "version": "0.1.0",
+  "name": "Application for Disabled Person Placard or Plates",
+  "shortName": "California DMV disabled parking placard or plates",
+  "issuer": "California Department of Motor Vehicles",
+  "jurisdiction": "California, United States",
+  "status": "draft",
+  "source": {
+    "officialUrl": "https://www.dmv.ca.gov/portal/uploads/2024/07/REG-195-R11-2023-AS-WWW-002.pdf",
+    "revisionLabel": "REG 195, revision 11/2023",
+    "blankAssetPath": "assets/forms/ca_dmv_reg195/2023-11/blank.pdf",
+    "reviewedAt": "2026-07-18"
+  },
+  "legalNotes": [
+    "The exact DMV form was not confirmed in the product discussion. REG 195 is a demo assumption.",
+    "The currently published instructions state that original signatures are required. Do not assume an app signature is accepted.",
+    "A clinician must verify and sign all provider certification content.",
+    "This starter template requires clinical, legal, and coordinate review before production."
+  ],
+  "formSelection": {
+    "aliases": [
+      "REG 195",
+      "DMV disabled placard form",
+      "disabled parking placard form",
+      "handicap placard form",
+      "disabled person plates form"
+    ],
+    "purposeExamples": [
+      "I need a parking placard because I cannot walk far.",
+      "My doctor needs to sign DMV paperwork for disabled parking.",
+      "I need disabled person plates or a placard."
+    ],
+    "patientDescription": "Use this form to apply for a California disabled person parking placard or disabled person license plates. A medical provider completes and signs the certification section.",
+    "positiveClues": [
+      "REG 195",
+      "disabled person placard",
+      "disabled parking placard",
+      "DMV",
+      "medical provider certification"
+    ],
+    "exclusionClues": [
+      "driver medical evaluation",
+      "reexamination",
+      "commercial driver",
+      "EDD disability",
+      "FMLA"
+    ]
+  },
+  "sections": [
+    {
+      "id": "applicant_information",
+      "title": "Applicant Information",
+      "patientTitle": "About you",
+      "order": 10,
+      "owner": "patient",
+      "renderOnOfficialForm": true
+    },
+    {
+      "id": "request_information",
+      "title": "Placard or Plate Request",
+      "patientTitle": "What you are requesting",
+      "order": 20,
+      "owner": "patient",
+      "renderOnOfficialForm": true
+    },
+    {
+      "id": "prior_placard",
+      "title": "Prior Placard Information",
+      "patientTitle": "Previous placard",
+      "order": 30,
+      "owner": "patient",
+      "renderOnOfficialForm": true
+    },
+    {
+      "id": "vehicle_information",
+      "title": "Vehicle Information",
+      "patientTitle": "Vehicle information",
+      "order": 40,
+      "owner": "patient",
+      "renderOnOfficialForm": true
+    },
+    {
+      "id": "patient_facts",
+      "title": "Patient-Reported Functional Information",
+      "patientTitle": "What you told us about walking and mobility",
+      "description": "Evidence collected for clinician review. These fields do not directly certify eligibility.",
+      "order": 50,
+      "owner": "patient",
+      "renderOnOfficialForm": false
+    },
+    {
+      "id": "patient_attestation",
+      "title": "Applicant Attestation",
+      "patientTitle": "Review and sign",
+      "order": 60,
+      "owner": "patient",
+      "renderOnOfficialForm": true
+    },
+    {
+      "id": "provider_information",
+      "title": "Medical Provider Information",
+      "patientTitle": "Clinic information",
+      "order": 70,
+      "owner": "clinician",
+      "renderOnOfficialForm": true
+    },
+    {
+      "id": "provider_certification",
+      "title": "Medical Provider Certification",
+      "patientTitle": "What the clinician will decide",
+      "order": 80,
+      "owner": "clinician",
+      "renderOnOfficialForm": true
+    },
+    {
+      "id": "provider_attestation",
+      "title": "Provider Attestation",
+      "patientTitle": "Clinician signature",
+      "order": 90,
+      "owner": "clinician",
+      "renderOnOfficialForm": true
+    }
+  ],
+  "fields": [
+    {
+      "id": "applicant.legal_name.first",
+      "sectionId": "applicant_information",
+      "label": "First name",
+      "type": "text",
+      "owner": "patient",
+      "required": true,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document",
+        "emr_demographics"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What is your legal first name?",
+      "confirmationRequired": true,
+      "validation": {
+        "minLength": 1,
+        "maxLength": 60
+      }
+    },
+    {
+      "id": "applicant.legal_name.middle",
+      "sectionId": "applicant_information",
+      "label": "Middle name",
+      "type": "text",
+      "owner": "patient",
+      "required": false,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document",
+        "emr_demographics"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What is your middle name? You can skip this if you do not have one.",
+      "unknownAllowed": true,
+      "confirmationRequired": true,
+      "validation": {
+        "maxLength": 60
+      }
+    },
+    {
+      "id": "applicant.legal_name.last",
+      "sectionId": "applicant_information",
+      "label": "Last name",
+      "type": "text",
+      "owner": "patient",
+      "required": true,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document",
+        "emr_demographics"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What is your legal last name?",
+      "confirmationRequired": true,
+      "validation": {
+        "minLength": 1,
+        "maxLength": 60
+      }
+    },
+    {
+      "id": "applicant.date_of_birth",
+      "sectionId": "applicant_information",
+      "label": "Date of birth",
+      "type": "date",
+      "owner": "patient",
+      "required": true,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document",
+        "emr_demographics"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What is your date of birth?",
+      "confirmationRequired": true,
+      "validation": {
+        "dateNotFuture": true
+      }
+    },
+    {
+      "id": "applicant.address.residential",
+      "sectionId": "applicant_information",
+      "label": "Residential address",
+      "type": "address",
+      "owner": "patient",
+      "required": true,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document",
+        "emr_demographics"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What is your current home address?",
+      "confirmationRequired": true
+    },
+    {
+      "id": "applicant.address.mailing_same_as_residential",
+      "sectionId": "applicant_information",
+      "label": "Mailing address is the same",
+      "type": "boolean",
+      "owner": "patient",
+      "required": true,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "Is your mailing address the same as your home address?",
+      "confirmationRequired": true
+    },
+    {
+      "id": "applicant.address.mailing",
+      "sectionId": "applicant_information",
+      "label": "Mailing address",
+      "type": "address",
+      "owner": "patient",
+      "required": false,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document",
+        "emr_demographics"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What mailing address should be used?",
+      "confirmationRequired": true
+    },
+    {
+      "id": "applicant.driver_license_or_id",
+      "sectionId": "applicant_information",
+      "label": "Driver license or identification number",
+      "type": "identifier",
+      "owner": "patient",
+      "required": false,
+      "allowedSources": [
+        "patient_direct_entry",
+        "uploaded_document"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What California driver license or identification card number should appear on the application?",
+      "patientHelpText": "Enter this only in the protected field, not in the chat message.",
+      "sensitive": true,
+      "confirmationRequired": true,
+      "validation": {
+        "maxLength": 30
+      }
+    },
+    {
+      "id": "applicant.phone",
+      "sectionId": "applicant_information",
+      "label": "Telephone number",
+      "type": "phone",
+      "owner": "patient",
+      "required": true,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document",
+        "emr_demographics"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What is the best phone number for this application?",
+      "confirmationRequired": true
+    },
+    {
+      "id": "applicant.email",
+      "sectionId": "applicant_information",
+      "label": "Email address",
+      "type": "email",
+      "owner": "patient",
+      "required": false,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document",
+        "emr_demographics"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What email address should the clinic use for this request?",
+      "unknownAllowed": true,
+      "confirmationRequired": true
+    },
+    {
+      "id": "request.types",
+      "sectionId": "request_information",
+      "label": "Requested placard or plates",
+      "type": "multi_choice",
+      "owner": "patient",
+      "required": true,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What are you asking the DMV for?",
+      "choices": [
+        {
+          "value": "permanent_placard",
+          "label": "Permanent disabled person parking placard",
+          "patientLabel": "A permanent parking placard"
+        },
+        {
+          "value": "temporary_placard",
+          "label": "Temporary disabled person parking placard",
+          "patientLabel": "A temporary parking placard"
+        },
+        {
+          "value": "disabled_person_plates",
+          "label": "Disabled person license plates",
+          "patientLabel": "Disabled person license plates"
+        }
+      ],
+      "confirmationRequired": true,
+      "validation": {
+        "minItems": 1,
+        "maxItems": 2
+      },
+      "notes": [
+        "The MVP is optimized for permanent and temporary placards. Other branches may require manual review."
+      ]
+    },
+    {
+      "id": "request.prior_placard.has_one",
+      "sectionId": "prior_placard",
+      "label": "Has a prior placard",
+      "type": "boolean",
+      "owner": "patient",
+      "required": true,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "Do you already have a disabled person parking placard?",
+      "confirmationRequired": true
+    },
+    {
+      "id": "request.prior_placard.number",
+      "sectionId": "prior_placard",
+      "label": "Prior placard number",
+      "type": "identifier",
+      "owner": "patient",
+      "required": false,
+      "allowedSources": [
+        "patient_direct_entry",
+        "uploaded_document"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What is the number on your current placard?",
+      "sensitive": true,
+      "confirmationRequired": true
+    },
+    {
+      "id": "request.prior_placard.expiration_date",
+      "sectionId": "prior_placard",
+      "label": "Prior placard expiration date",
+      "type": "date",
+      "owner": "patient",
+      "required": false,
+      "allowedSources": [
+        "patient_direct_entry",
+        "uploaded_document"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "When does your current placard expire?",
+      "confirmationRequired": true
+    },
+    {
+      "id": "vehicle.plate_number",
+      "sectionId": "vehicle_information",
+      "label": "License plate number",
+      "type": "identifier",
+      "owner": "patient",
+      "required": false,
+      "allowedSources": [
+        "patient_direct_entry",
+        "uploaded_document",
+        "emr_demographics"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What is the vehicle's license plate number?",
+      "sensitive": true,
+      "confirmationRequired": true
+    },
+    {
+      "id": "vehicle.vin",
+      "sectionId": "vehicle_information",
+      "label": "Vehicle identification number",
+      "type": "identifier",
+      "owner": "patient",
+      "required": false,
+      "allowedSources": [
+        "patient_direct_entry",
+        "uploaded_document"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What is the vehicle identification number, or VIN?",
+      "patientHelpText": "Enter this only in the protected field.",
+      "sensitive": true,
+      "confirmationRequired": true
+    },
+    {
+      "id": "vehicle.year",
+      "sectionId": "vehicle_information",
+      "label": "Vehicle year",
+      "type": "number",
+      "owner": "patient",
+      "required": false,
+      "allowedSources": [
+        "patient_direct_entry",
+        "uploaded_document"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What year is the vehicle?",
+      "confirmationRequired": true,
+      "validation": {
+        "minimum": 1900,
+        "maximum": 2100
+      }
+    },
+    {
+      "id": "vehicle.make",
+      "sectionId": "vehicle_information",
+      "label": "Vehicle make",
+      "type": "text",
+      "owner": "patient",
+      "required": false,
+      "allowedSources": [
+        "patient_direct_entry",
+        "uploaded_document"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What company made the vehicle?",
+      "confirmationRequired": true,
+      "validation": {
+        "maxLength": 50
+      }
+    },
+    {
+      "id": "patient_facts.condition_description",
+      "sectionId": "patient_facts",
+      "label": "Patient-reported condition",
+      "type": "multiline_text",
+      "owner": "patient",
+      "required": true,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document",
+        "emr_condition"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What health condition is your clinician treating that affects your ability to walk or get around?",
+      "whyWeAsk": "Your clinician will use this information when reviewing the medical section.",
+      "patientMaySuggest": true,
+      "confirmationRequired": true,
+      "validation": {
+        "maxLength": 1000
+      }
+    },
+    {
+      "id": "patient_facts.functional_limitations",
+      "sectionId": "patient_facts",
+      "label": "Patient-reported functional limitation",
+      "type": "multiline_text",
+      "owner": "patient",
+      "required": true,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document",
+        "encounter_transcript",
+        "emr_observation"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "What happens when you walk from a parking area into a building?",
+      "patientMaySuggest": true,
+      "confirmationRequired": true,
+      "validation": {
+        "maxLength": 1500
+      }
+    },
+    {
+      "id": "patient_facts.mobility_aids",
+      "sectionId": "patient_facts",
+      "label": "Mobility aids",
+      "type": "multi_choice",
+      "owner": "patient",
+      "required": false,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document",
+        "encounter_transcript"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "Do you use anything to help you walk or get around?",
+      "choices": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "cane",
+          "label": "Cane"
+        },
+        {
+          "value": "walker",
+          "label": "Walker"
+        },
+        {
+          "value": "wheelchair",
+          "label": "Wheelchair"
+        },
+        {
+          "value": "brace",
+          "label": "Brace"
+        },
+        {
+          "value": "oxygen",
+          "label": "Portable oxygen"
+        },
+        {
+          "value": "other",
+          "label": "Other"
+        }
+      ],
+      "unknownAllowed": true,
+      "patientMaySuggest": true,
+      "confirmationRequired": true
+    },
+    {
+      "id": "patient_facts.onset_description",
+      "sectionId": "patient_facts",
+      "label": "Patient-reported onset",
+      "type": "text",
+      "owner": "patient",
+      "required": false,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document",
+        "encounter_note",
+        "encounter_transcript"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "When did this walking limitation begin or become this severe?",
+      "unknownAllowed": true,
+      "patientMaySuggest": true,
+      "confirmationRequired": true,
+      "validation": {
+        "maxLength": 200
+      }
+    },
+    {
+      "id": "patient_facts.expected_duration",
+      "sectionId": "patient_facts",
+      "label": "Patient-reported expected duration",
+      "type": "single_choice",
+      "owner": "patient",
+      "required": false,
+      "allowedSources": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document",
+        "encounter_note"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientQuestion": "Based on what your clinician has told you, is this expected to be temporary or long term?",
+      "choices": [
+        {
+          "value": "temporary",
+          "label": "Temporary"
+        },
+        {
+          "value": "long_term",
+          "label": "Long term"
+        },
+        {
+          "value": "unknown",
+          "label": "I do not know"
+        }
+      ],
+      "unknownAllowed": true,
+      "patientMaySuggest": true,
+      "confirmationRequired": true
+    },
+    {
+      "id": "signature.patient",
+      "sectionId": "patient_attestation",
+      "label": "Applicant signature",
+      "type": "signature",
+      "owner": "patient",
+      "required": true,
+      "allowedSources": [
+        "patient_direct_entry"
+      ],
+      "rendering": {
+        "mode": "signature",
+        "implemented": false
+      },
+      "notes": [
+        "Workflow demo only until issuer acceptance is confirmed."
+      ]
+    },
+    {
+      "id": "provider.name",
+      "sectionId": "provider_information",
+      "label": "Medical provider name",
+      "type": "text",
+      "owner": "clinician",
+      "required": true,
+      "allowedSources": [
+        "clinician",
+        "system"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientMaySuggest": false,
+      "validation": {
+        "maxLength": 100
+      }
+    },
+    {
+      "id": "provider.license_number",
+      "sectionId": "provider_information",
+      "label": "License or certification number",
+      "type": "identifier",
+      "owner": "clinician",
+      "required": true,
+      "allowedSources": [
+        "clinician",
+        "system"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "sensitive": true,
+      "validation": {
+        "maxLength": 50
+      }
+    },
+    {
+      "id": "provider.license_state",
+      "sectionId": "provider_information",
+      "label": "License jurisdiction",
+      "type": "text",
+      "owner": "clinician",
+      "required": true,
+      "allowedSources": [
+        "clinician",
+        "system"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "validation": {
+        "maxLength": 30
+      }
+    },
+    {
+      "id": "provider.provider_type",
+      "sectionId": "provider_information",
+      "label": "Provider type",
+      "type": "single_choice",
+      "owner": "clinician",
+      "required": true,
+      "allowedSources": [
+        "clinician",
+        "system"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "choices": [
+        {
+          "value": "physician",
+          "label": "Physician"
+        },
+        {
+          "value": "surgeon",
+          "label": "Surgeon"
+        },
+        {
+          "value": "chiropractor",
+          "label": "Chiropractor"
+        },
+        {
+          "value": "optometrist",
+          "label": "Optometrist"
+        },
+        {
+          "value": "physician_assistant",
+          "label": "Physician assistant"
+        },
+        {
+          "value": "nurse_practitioner",
+          "label": "Nurse practitioner"
+        },
+        {
+          "value": "certified_nurse_midwife",
+          "label": "Certified nurse-midwife"
+        },
+        {
+          "value": "other_authorized",
+          "label": "Other authorized provider"
+        }
+      ]
+    },
+    {
+      "id": "provider.address",
+      "sectionId": "provider_information",
+      "label": "Provider practice address",
+      "type": "address",
+      "owner": "clinician",
+      "required": true,
+      "allowedSources": [
+        "clinician",
+        "system"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      }
+    },
+    {
+      "id": "provider.phone",
+      "sectionId": "provider_information",
+      "label": "Provider telephone number",
+      "type": "phone",
+      "owner": "clinician",
+      "required": true,
+      "allowedSources": [
+        "clinician",
+        "system"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      }
+    },
+    {
+      "id": "certification.qualifying_category",
+      "sectionId": "provider_certification",
+      "label": "Qualifying certification category",
+      "type": "single_choice",
+      "owner": "clinician",
+      "required": true,
+      "allowedSources": [
+        "patient_chat",
+        "uploaded_document",
+        "emr_condition",
+        "emr_observation",
+        "encounter_note",
+        "encounter_transcript",
+        "clinician"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientMaySuggest": false,
+      "choices": [
+        {
+          "value": "cannot_walk_without_assistance",
+          "label": "Cannot walk without assistance from another person or an assistive device"
+        },
+        {
+          "value": "severe_lung_disease",
+          "label": "Severe lung disease meeting the form criteria"
+        },
+        {
+          "value": "requires_portable_oxygen",
+          "label": "Requires portable oxygen"
+        },
+        {
+          "value": "severe_cardiac_condition",
+          "label": "Severe cardiac condition meeting the form criteria"
+        },
+        {
+          "value": "substantial_mobility_impairment",
+          "label": "Substantial mobility impairment due to a diagnosed disease or disorder"
+        },
+        {
+          "value": "visual_impairment",
+          "label": "Qualifying visual impairment"
+        },
+        {
+          "value": "other_current_form_category",
+          "label": "Another category on the current official form"
+        }
+      ],
+      "notes": [
+        "Copy exact legal wording and numbered categories from the approved current revision before production. Do not preselect."
+      ]
+    },
+    {
+      "id": "certification.clinical_description",
+      "sectionId": "provider_certification",
+      "label": "Clinical description",
+      "type": "multiline_text",
+      "owner": "clinician",
+      "required": true,
+      "allowedSources": [
+        "patient_chat",
+        "uploaded_document",
+        "emr_condition",
+        "emr_observation",
+        "encounter_note",
+        "encounter_transcript",
+        "clinician"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientMaySuggest": true,
+      "validation": {
+        "maxLength": 1500
+      }
+    },
+    {
+      "id": "certification.expected_end_date",
+      "sectionId": "provider_certification",
+      "label": "Expected end date for temporary limitation",
+      "type": "date",
+      "owner": "clinician",
+      "required": false,
+      "allowedSources": [
+        "patient_chat",
+        "uploaded_document",
+        "encounter_note",
+        "encounter_transcript",
+        "clinician"
+      ],
+      "rendering": {
+        "mode": "review_packet",
+        "implemented": true
+      },
+      "patientMaySuggest": true
+    },
+    {
+      "id": "signature.clinician",
+      "sectionId": "provider_attestation",
+      "label": "Medical provider signature",
+      "type": "signature",
+      "owner": "clinician",
+      "required": true,
+      "allowedSources": [
+        "clinician"
+      ],
+      "rendering": {
+        "mode": "signature",
+        "implemented": false
+      },
+      "notes": [
+        "Workflow demo only until issuer acceptance is confirmed."
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": "show_mailing_address",
+      "when": {
+        "field": "applicant.address.mailing_same_as_residential",
+        "operator": "isFalse"
+      },
+      "then": {
+        "requireField": "applicant.address.mailing"
+      }
+    },
+    {
+      "id": "show_prior_placard_number",
+      "when": {
+        "field": "request.prior_placard.has_one",
+        "operator": "isTrue"
+      },
+      "then": {
+        "requireField": "request.prior_placard.number"
+      }
+    },
+    {
+      "id": "show_vehicle_information",
+      "when": {
+        "field": "request.types",
+        "operator": "includes",
+        "value": "disabled_person_plates"
+      },
+      "then": {
+        "showSection": "vehicle_information"
+      }
+    },
+    {
+      "id": "require_vehicle_vin",
+      "when": {
+        "field": "request.types",
+        "operator": "includes",
+        "value": "disabled_person_plates"
+      },
+      "then": {
+        "requireField": "vehicle.vin"
+      }
+    },
+    {
+      "id": "temporary_end_date",
+      "when": {
+        "field": "request.types",
+        "operator": "includes",
+        "value": "temporary_placard"
+      },
+      "then": {
+        "requireField": "certification.expected_end_date"
+      }
+    }
+  ],
+  "signatures": [
+    {
+      "role": "patient",
+      "attestationKey": "patient-reg195-v1",
+      "scopeSectionIds": [
+        "applicant_information",
+        "request_information",
+        "prior_placard",
+        "vehicle_information",
+        "patient_attestation"
+      ],
+      "requiresRecentAuthentication": false
+    },
+    {
+      "role": "clinician",
+      "attestationKey": "clinician-reg195-v1",
+      "scopeSectionIds": [
+        "provider_information",
+        "provider_certification",
+        "provider_attestation"
+      ],
+      "requiresRecentAuthentication": true
+    }
+  ],
+  "rendering": {
+    "defaultMode": "review_packet",
+    "rendererVersion": "review-packet-v1",
+    "officialAssetReady": false,
+    "notes": [
+      "Official PDF coordinates are intentionally not claimed complete.",
+      "Use a Sidekick review packet for the hackathon or complete and validate an overlay map against the exact revision.",
+      "Do not label the review packet as an official DMV submission."
+    ]
+  }
+}

@@ -1,0 +1,595 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sidekick.example/schemas/form-template.schema.json",
+  "title": "Sidekick Form Template",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "key",
+    "version",
+    "name",
+    "issuer",
+    "status",
+    "formSelection",
+    "sections",
+    "fields",
+    "rules",
+    "signatures",
+    "rendering"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0"
+    },
+    "key": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "shortName": {
+      "type": "string"
+    },
+    "issuer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "jurisdiction": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "active",
+        "retired"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revisionLabel",
+        "reviewedAt"
+      ],
+      "properties": {
+        "officialUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "revisionLabel": {
+          "type": "string"
+        },
+        "blankAssetPath": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "reviewedAt": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "legalNotes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "formSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "aliases",
+        "purposeExamples",
+        "patientDescription"
+      ],
+      "properties": {
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "purposeExamples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "patientDescription": {
+          "type": "string",
+          "minLength": 1
+        },
+        "positiveClues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exclusionClues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/section"
+      }
+    },
+    "fields": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/field"
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/rule"
+      }
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/signatureDefinition"
+      },
+      "minItems": 1
+    },
+    "rendering": {
+      "$ref": "#/$defs/rendering"
+    }
+  },
+  "$defs": {
+    "owner": {
+      "enum": [
+        "patient",
+        "staff",
+        "clinician",
+        "system"
+      ]
+    },
+    "sourceType": {
+      "enum": [
+        "patient_chat",
+        "patient_direct_entry",
+        "uploaded_document",
+        "emr_demographics",
+        "emr_condition",
+        "emr_observation",
+        "emr_medication",
+        "encounter_note",
+        "encounter_transcript",
+        "staff",
+        "clinician",
+        "system"
+      ]
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "order",
+        "owner"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_.]+$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "patientTitle": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "owner": {
+          "$ref": "#/$defs/owner"
+        },
+        "renderOnOfficialForm": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "choice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "label"
+      ],
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        },
+        "label": {
+          "type": "string"
+        },
+        "patientLabel": {
+          "type": "string"
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "minLength": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxLength": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pattern": {
+          "type": "string"
+        },
+        "minimum": {
+          "type": "number"
+        },
+        "maximum": {
+          "type": "number"
+        },
+        "minItems": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "maxItems": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "dateNotFuture": {
+          "type": "boolean"
+        }
+      }
+    },
+    "renderTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "none",
+            "text",
+            "checkbox",
+            "signature",
+            "review_packet"
+          ]
+        },
+        "implemented": {
+          "type": "boolean"
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "width": {
+          "type": "number",
+          "minimum": 0
+        },
+        "height": {
+          "type": "number",
+          "minimum": 0
+        },
+        "fontSize": {
+          "type": "number",
+          "minimum": 1
+        },
+        "minFontSize": {
+          "type": "number",
+          "minimum": 1
+        },
+        "overflow": {
+          "enum": [
+            "shrink",
+            "wrap",
+            "truncate",
+            "error"
+          ]
+        },
+        "choiceTargets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/checkboxPosition"
+          }
+        }
+      }
+    },
+    "checkboxPosition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "page",
+        "x",
+        "y",
+        "size"
+      ],
+      "properties": {
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "size": {
+          "type": "number",
+          "minimum": 1
+        }
+      }
+    },
+    "field": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "sectionId",
+        "label",
+        "type",
+        "owner",
+        "required",
+        "allowedSources",
+        "rendering"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_.]+$"
+        },
+        "sectionId": {
+          "type": "string",
+          "pattern": "^[a-z0-9_.]+$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "patientLabel": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "text",
+            "multiline_text",
+            "boolean",
+            "date",
+            "phone",
+            "email",
+            "address",
+            "single_choice",
+            "multi_choice",
+            "number",
+            "identifier",
+            "signature"
+          ]
+        },
+        "owner": {
+          "$ref": "#/$defs/owner"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "patientMaySuggest": {
+          "type": "boolean"
+        },
+        "patientQuestion": {
+          "type": "string"
+        },
+        "patientHelpText": {
+          "type": "string"
+        },
+        "whyWeAsk": {
+          "type": "string"
+        },
+        "unknownAllowed": {
+          "type": "boolean"
+        },
+        "sensitive": {
+          "type": "boolean"
+        },
+        "confirmationRequired": {
+          "type": "boolean"
+        },
+        "groupWith": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/choice"
+          }
+        },
+        "allowedSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceType"
+          },
+          "minItems": 1
+        },
+        "validation": {
+          "$ref": "#/$defs/validation"
+        },
+        "rendering": {
+          "$ref": "#/$defs/renderTarget"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "field",
+        "operator"
+      ],
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "operator": {
+          "enum": [
+            "equals",
+            "notEquals",
+            "includes",
+            "isTrue",
+            "isFalse",
+            "isPresent"
+          ]
+        },
+        "value": {}
+      }
+    },
+    "ruleAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "showSection": {
+          "type": "string"
+        },
+        "hideSection": {
+          "type": "string"
+        },
+        "requireField": {
+          "type": "string"
+        },
+        "clearField": {
+          "type": "string"
+        },
+        "addIssue": {
+          "type": "string"
+        }
+      },
+      "minProperties": 1,
+      "maxProperties": 1
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "when",
+        "then"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "when": {
+          "$ref": "#/$defs/condition"
+        },
+        "then": {
+          "$ref": "#/$defs/ruleAction"
+        }
+      }
+    },
+    "signatureDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "attestationKey",
+        "scopeSectionIds"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "patient",
+            "clinician"
+          ]
+        },
+        "attestationKey": {
+          "type": "string"
+        },
+        "scopeSectionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "requiresRecentAuthentication": {
+          "type": "boolean"
+        }
+      }
+    },
+    "rendering": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "defaultMode",
+        "rendererVersion"
+      ],
+      "properties": {
+        "defaultMode": {
+          "enum": [
+            "official_pdf_overlay",
+            "review_packet"
+          ]
+        },
+        "rendererVersion": {
+          "type": "string"
+        },
+        "officialAssetReady": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

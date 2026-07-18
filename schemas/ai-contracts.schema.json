@@ -1,0 +1,376 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sidekick.example/schemas/ai-contracts.schema.json",
+  "title": "Sidekick AI Capability Outputs",
+  "$defs": {
+    "confidence": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "identifyFormResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "disposition",
+        "candidates"
+      ],
+      "properties": {
+        "disposition": {
+          "enum": [
+            "matched",
+            "clarify",
+            "unsupported"
+          ]
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "templateKey",
+              "confidence",
+              "reasonCodes"
+            ],
+            "properties": {
+              "templateKey": {
+                "type": "string"
+              },
+              "confidence": {
+                "$ref": "#/$defs/confidence"
+              },
+              "reasonCodes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "clarificationQuestion": {
+          "type": "string"
+        },
+        "unsupportedSummary": {
+          "type": "string"
+        }
+      }
+    },
+    "documentMappingResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "suggestions",
+        "unmappedBlockIds",
+        "warnings"
+      ],
+      "properties": {
+        "suggestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "fieldId",
+              "value",
+              "sourceBlockIds",
+              "exactExcerpt",
+              "confidence",
+              "requiresConfirmation"
+            ],
+            "properties": {
+              "fieldId": {
+                "type": "string"
+              },
+              "value": {},
+              "sourceBlockIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "exactExcerpt": {
+                "type": "string"
+              },
+              "confidence": {
+                "$ref": "#/$defs/confidence"
+              },
+              "requiresConfirmation": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "unmappedBlockIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "interviewPlanResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action",
+        "rationaleCode"
+      ],
+      "properties": {
+        "action": {
+          "enum": [
+            "ask",
+            "review",
+            "complete",
+            "escalate"
+          ]
+        },
+        "questionId": {
+          "type": "string"
+        },
+        "targetFieldIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "text": {
+          "type": "string"
+        },
+        "responseType": {
+          "type": "string"
+        },
+        "choices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "value",
+              "label"
+            ],
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "rationaleCode": {
+          "type": "string"
+        }
+      }
+    },
+    "normalizeAnswerResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "values",
+        "safetyFlags"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "mapped",
+            "needs_clarification",
+            "declined",
+            "out_of_scope"
+          ]
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "fieldId",
+              "value",
+              "exactExcerpt"
+            ],
+            "properties": {
+              "fieldId": {
+                "type": "string"
+              },
+              "value": {},
+              "exactExcerpt": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "clarificationQuestion": {
+          "type": "string"
+        },
+        "safetyFlags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "issueAnalysisResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conflicts",
+        "appointmentConsiderations",
+        "staffSummary"
+      ],
+      "properties": {
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "fieldId",
+              "evidenceIds",
+              "type",
+              "summary",
+              "severity"
+            ],
+            "properties": {
+              "fieldId": {
+                "type": "string"
+              },
+              "evidenceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 2
+              },
+              "type": {
+                "enum": [
+                  "value_difference",
+                  "date_difference",
+                  "newer_patient_information",
+                  "ambiguous"
+                ]
+              },
+              "summary": {
+                "type": "string"
+              },
+              "severity": {
+                "enum": [
+                  "info",
+                  "warning",
+                  "critical"
+                ]
+              }
+            }
+          }
+        },
+        "appointmentConsiderations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "reasonCode",
+              "summary",
+              "evidenceIds"
+            ],
+            "properties": {
+              "reasonCode": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "evidenceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "staffSummary": {
+          "type": "string"
+        }
+      }
+    },
+    "clinicianSummaryResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "bullets",
+        "unresolvedItems"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "bullets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "text",
+              "evidenceIds",
+              "sourceLabel"
+            ],
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "evidenceIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "minItems": 1
+              },
+              "sourceLabel": {
+                "enum": [
+                  "patient_reported",
+                  "chart",
+                  "encounter_transcript",
+                  "mixed"
+                ]
+              }
+            }
+          }
+        },
+        "unresolvedItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "fieldId",
+              "questionForClinician"
+            ],
+            "properties": {
+              "fieldId": {
+                "type": "string"
+              },
+              "questionForClinician": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

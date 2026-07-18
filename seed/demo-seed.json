@@ -1,0 +1,298 @@
+{
+  "seedVersion": "sidekick-demo-v1",
+  "synthetic": true,
+  "fixedNow": "2026-07-18T09:00:00-07:00",
+  "organizations": [
+    {
+      "id": "org_harbor_demo",
+      "name": "Harbor Family Medicine",
+      "slug": "harbor-family",
+      "timeZone": "America/Los_Angeles",
+      "status": "active"
+    },
+    {
+      "id": "org_cedar_demo",
+      "name": "Cedar Health Clinic",
+      "slug": "cedar-health",
+      "timeZone": "America/Los_Angeles",
+      "status": "active"
+    }
+  ],
+  "clinicLinks": [
+    {
+      "token": "demo-harbor-start",
+      "organizationId": "org_harbor_demo",
+      "intent": "start_form",
+      "active": true
+    },
+    {
+      "token": "demo-cedar-start",
+      "organizationId": "org_cedar_demo",
+      "intent": "start_form",
+      "active": true
+    }
+  ],
+  "users": [
+    {
+      "id": "usr_maya_patient",
+      "displayName": "Maya Rivera",
+      "email": "maya.patient@example.test"
+    },
+    {
+      "id": "usr_jordan_staff",
+      "displayName": "Jordan Lee",
+      "email": "jordan.staff@example.test"
+    },
+    {
+      "id": "usr_priya_clinician",
+      "displayName": "Priya Shah",
+      "email": "priya.clinician@example.test"
+    },
+    {
+      "id": "usr_alex_admin",
+      "displayName": "Alex Morgan",
+      "email": "alex.admin@example.test"
+    },
+    {
+      "id": "usr_casey_staff",
+      "displayName": "Casey Brooks",
+      "email": "casey.staff@example.test"
+    }
+  ],
+  "memberships": [
+    {
+      "id": "mem_maya_harbor",
+      "userId": "usr_maya_patient",
+      "organizationId": "org_harbor_demo",
+      "role": "patient",
+      "status": "active"
+    },
+    {
+      "id": "mem_jordan_harbor",
+      "userId": "usr_jordan_staff",
+      "organizationId": "org_harbor_demo",
+      "role": "staff",
+      "status": "active"
+    },
+    {
+      "id": "mem_priya_harbor",
+      "userId": "usr_priya_clinician",
+      "organizationId": "org_harbor_demo",
+      "role": "clinician",
+      "status": "active",
+      "clinicianProfileId": "cp_priya"
+    },
+    {
+      "id": "mem_alex_harbor",
+      "userId": "usr_alex_admin",
+      "organizationId": "org_harbor_demo",
+      "role": "admin",
+      "status": "active"
+    },
+    {
+      "id": "mem_casey_cedar",
+      "userId": "usr_casey_staff",
+      "organizationId": "org_cedar_demo",
+      "role": "staff",
+      "status": "active"
+    }
+  ],
+  "clinicianProfiles": [
+    {
+      "id": "cp_priya",
+      "organizationId": "org_harbor_demo",
+      "userId": "usr_priya_clinician",
+      "displayName": "Priya Shah, MD",
+      "licenseNumber": "DEMO-CA-12345",
+      "licenseState": "CA",
+      "providerType": "physician",
+      "practiceAddress": {
+        "line1": "500 Synthetic Avenue",
+        "city": "Oakland",
+        "state": "CA",
+        "postalCode": "94612"
+      },
+      "phone": "+15105550999",
+      "synthetic": true,
+      "active": true
+    }
+  ],
+  "patients": [
+    {
+      "id": "pat_maya_rivera",
+      "organizationId": "org_harbor_demo",
+      "mrn": "DEMO-1001",
+      "legalFirstName": "Maya",
+      "legalLastName": "Rivera",
+      "dateOfBirth": "1967-08-14",
+      "address": {
+        "line1": "100 Demo Street",
+        "city": "Oakland",
+        "state": "CA",
+        "postalCode": "94601"
+      },
+      "phone": "+15105550123",
+      "linkedUserId": "usr_maya_patient",
+      "matchingStatus": "linked",
+      "synthetic": true
+    },
+    {
+      "id": "pat_appointment_case",
+      "organizationId": "org_harbor_demo",
+      "mrn": "DEMO-1002",
+      "legalFirstName": "Sam",
+      "legalLastName": "Nguyen",
+      "dateOfBirth": "1974-04-22",
+      "address": {
+        "line1": "200 Example Road",
+        "city": "Oakland",
+        "state": "CA",
+        "postalCode": "94607"
+      },
+      "phone": "+15105550124",
+      "matchingStatus": "linked",
+      "synthetic": true
+    }
+  ],
+  "encounters": [
+    {
+      "id": "enc_maya_recent",
+      "organizationId": "org_harbor_demo",
+      "patientId": "pat_maya_rivera",
+      "occurredAt": "2026-07-10T14:00:00-07:00",
+      "type": "office_visit",
+      "clinicianName": "Priya Shah, MD",
+      "reason": "Worsening bilateral knee pain and mobility limitation",
+      "conditionIds": [
+        "cond_maya_knee_oa"
+      ],
+      "observationIds": [
+        "obs_maya_gait"
+      ],
+      "transcriptId": "tx_maya_recent",
+      "synthetic": true
+    },
+    {
+      "id": "enc_maya_older",
+      "organizationId": "org_harbor_demo",
+      "patientId": "pat_maya_rivera",
+      "occurredAt": "2026-03-03T11:30:00-08:00",
+      "type": "office_visit",
+      "clinicianName": "Priya Shah, MD",
+      "reason": "Knee pain follow-up",
+      "conditionIds": [
+        "cond_maya_knee_oa"
+      ],
+      "observationIds": [],
+      "transcriptId": "tx_maya_older",
+      "synthetic": true
+    }
+  ],
+  "conditions": [
+    {
+      "id": "cond_maya_knee_oa",
+      "organizationId": "org_harbor_demo",
+      "patientId": "pat_maya_rivera",
+      "code": "SYNTHETIC-OA-KNEE",
+      "display": "Bilateral knee osteoarthritis",
+      "status": "active",
+      "recordedAt": "2025-10-02",
+      "synthetic": true
+    },
+    {
+      "id": "cond_maya_irrelevant",
+      "organizationId": "org_harbor_demo",
+      "patientId": "pat_maya_rivera",
+      "code": "SYNTHETIC-ALLERGY",
+      "display": "Seasonal allergic rhinitis",
+      "status": "active",
+      "recordedAt": "2023-04-01",
+      "synthetic": true
+    }
+  ],
+  "observations": [
+    {
+      "id": "obs_maya_gait",
+      "organizationId": "org_harbor_demo",
+      "patientId": "pat_maya_rivera",
+      "display": "Gait observation",
+      "value": "Antalgic gait documented",
+      "observedAt": "2026-07-10T14:20:00-07:00",
+      "synthetic": true
+    }
+  ],
+  "transcripts": [
+    {
+      "id": "tx_maya_recent",
+      "organizationId": "org_harbor_demo",
+      "patientId": "pat_maya_rivera",
+      "encounterId": "enc_maya_recent",
+      "occurredAt": "2026-07-10T14:00:00-07:00",
+      "segments": [
+        {
+          "id": "seg_recent_1",
+          "speakerRole": "patient",
+          "text": "My knees have been much worse lately and it is hard to get from the parking lot into a store."
+        },
+        {
+          "id": "seg_recent_2",
+          "speakerRole": "clinician",
+          "text": "Your knee osteoarthritis is clearly affecting your walking. We will continue the treatment plan and reassess your mobility."
+        }
+      ],
+      "synthetic": true
+    },
+    {
+      "id": "tx_maya_older",
+      "organizationId": "org_harbor_demo",
+      "patientId": "pat_maya_rivera",
+      "encounterId": "enc_maya_older",
+      "occurredAt": "2026-03-03T11:30:00-08:00",
+      "segments": [
+        {
+          "id": "seg_older_1",
+          "speakerRole": "patient",
+          "text": "The knee pain started bothering me more around March."
+        },
+        {
+          "id": "seg_older_2",
+          "speakerRole": "clinician",
+          "text": "No assistive device is being used today."
+        }
+      ],
+      "synthetic": true
+    }
+  ],
+  "demoCases": [
+    {
+      "id": "case_primary_success",
+      "organizationId": "org_harbor_demo",
+      "patientId": "pat_maya_rivera",
+      "templateKey": "ca_dmv_reg195",
+      "scenario": "review_only_success",
+      "patientAnswers": {
+        "request.types": [
+          "permanent_placard"
+        ],
+        "request.prior_placard.has_one": false,
+        "patient_facts.condition_description": "Arthritis in both knees.",
+        "patient_facts.functional_limitations": "I can go about half a block, then the pain gets bad and I have to stop.",
+        "patient_facts.mobility_aids": [
+          "cane"
+        ],
+        "patient_facts.onset_description": "Around June.",
+        "patient_facts.expected_duration": "long_term"
+      },
+      "staffDisposition": "review_only"
+    },
+    {
+      "id": "case_appointment_hold",
+      "organizationId": "org_harbor_demo",
+      "patientId": "pat_appointment_case",
+      "templateKey": "ca_dmv_reg195",
+      "scenario": "appointment_required",
+      "appointmentAt": "2026-07-18T09:02:00-07:00",
+      "staffDisposition": "appointment_required"
+    }
+  ]
+}

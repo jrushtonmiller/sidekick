@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sidekick.example/schemas/workflow-event.schema.json",
+  "title": "Sidekick Workflow Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "organizationId",
+    "submissionId",
+    "actor",
+    "action",
+    "fromStatus",
+    "toStatus",
+    "occurredAt",
+    "requestId"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "organizationId": {
+      "type": "string"
+    },
+    "submissionId": {
+      "type": "string"
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role"
+      ],
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "patient",
+            "staff",
+            "clinician",
+            "admin",
+            "system"
+          ]
+        },
+        "service": {
+          "type": "string"
+        }
+      }
+    },
+    "action": {
+      "type": "string"
+    },
+    "fromStatus": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "toStatus": {
+      "type": "string"
+    },
+    "reasonCode": {
+      "type": "string"
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "requestId": {
+      "type": "string"
+    },
+    "expectedVersion": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "resultingVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "boolean",
+          "null"
+        ]
+      }
+    }
+  }
+}
